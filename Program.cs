@@ -163,3 +163,24 @@ while(!anda)
         break;
     }
 }
+
+
+// EJERCICIO 2
+
+string[] FilesArray = Directory.GetFiles(@"D:\git 3.0\tl1_tp8_2023-MauroOrlando2000");
+string FilesString = "";
+foreach(string array in FilesArray)
+{
+    int nombreInt = array.LastIndexOf("\\");
+    int extensionInt = array.LastIndexOf(".");
+    string nombre = array.Substring((nombreInt + 1), (extensionInt - nombreInt - 1));
+    string extension = array.Substring(extensionInt);
+    string indice = array.Substring(0, (nombreInt));
+    FilesString += $"{indice},{nombre},{extension}\n";
+}
+
+string archivoCsv = @"D:\git 3.0\tl1_tp8_2023-MauroOrlando2000\index.csv";
+using(StreamWriter sw = File.CreateText(archivoCsv))
+{
+    sw.Write(FilesString);
+}
